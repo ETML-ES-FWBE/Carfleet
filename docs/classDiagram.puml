@@ -12,6 +12,7 @@ class Person{
     + <<get>>firstname():string
     + <<get>>phonenumber():string
     + <<get, set>>languages():string[]
+    - doesLanguageExist(language:string):bool
 }
 
 @enduml
