@@ -77,35 +77,44 @@ public class PersonTest {
         }
     }
 
-    /* Test written in CSharp
-        [Test]
-    public void Languages_AddMultipleLanguagesInExistingLanguagesList_GetCorrectListOfLanguages()
-    {
+    @Test
+    public void languages_addMultipleLanguagesInExistingLanguagesList_getCorrectListOfLanguages(){
         //given
-        List<string> initialLanguages = new List<string>() { "French", "Spanish", "German" };
-        List<string> additionalLanguages = new List<string>() { "Vietnamese"};
-        List<string> expectedLanguages = new List<string>();
-        expectedLanguages.AddRange(initialLanguages);
-        expectedLanguages.AddRange(additionalLanguages);
-        _person.Languages = initialLanguages;
-        Assert.AreEqual(initialLanguages.Count, _person.Languages.Count);
+        ArrayList<String> initialLanguages = new ArrayList<String>(){
+            {
+                add("French");
+                add("Spanish");
+                add("German");
+            }
+        };
+
+        ArrayList<String> additionalLanguages = new ArrayList<String>(){
+            {
+                add("Vitenamese");
+            }
+        };
+
+        ArrayList<String> expectedLanguages = new ArrayList<String>(){
+            {
+                addAll(initialLanguages);
+                addAll(additionalLanguages);
+            }
+        };
+        _person.setLanguages(initialLanguages);
+        assertEquals(3, _person.getLanguages().size());
 
         //when
-        _person.Languages = additionalLanguages;
+        _person.setLanguages(additionalLanguages);
 
         //then
-        Assert.AreEqual(expectedLanguages.Count, _person.Languages.Count);
-        foreach (string expectedLanguage in expectedLanguages)
-        {
-            bool languageExists = false;
-            if (_person.Languages.Contains(expectedLanguage))
-            {
-                languageExists = true;
-            }
-            Assert.IsTrue(languageExists);
+        ArrayList<String> actualLanguages = _person.getLanguages();
+        assertEquals(expectedLanguages.size(), actualLanguages.size());
+        for(int i = 0; i < expectedLanguages.size(); i++){
+            assertEquals(expectedLanguages.get(i), actualLanguages.get(i));
         }
     }
 
+    /* Test written in CSharp
         [Test]
     public void Languages_AddMultipleLanguagesInExistingLanguagesListWithDuplicate_GetCorrectListOfLanguages()
     {
