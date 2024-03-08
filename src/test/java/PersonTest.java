@@ -32,25 +32,13 @@ public class PersonTest {
 
         //then
         assertEquals(_name, _person.getName());
+        assertEquals(_firstname, _person.getFirstname());
+        assertEquals(_phonenumber, _person.getPhonenumber());
+        assertEquals(_emailaddress, _person.getEmailaddress());
+        assertEquals(_languages, _person.getLanguages());
     }
 
     /* Test written in CSharp
-    [Test]
-        public void AllProperties_AfterInstantiation_GetCorrectValues()
-        {
-            //given
-
-            //when
-
-            //then
-            Assert.AreEqual(_name, _person.Name);
-            Assert.AreEqual(_firstname, _person.Firstname);
-            Assert.AreEqual(_phonenumber, _person.Phonenumber);
-            Assert.AreEqual(_emailaddress, _person.Emailaddress);
-            Assert.AreEqual(_languages, _person.Languages);
-        }
-
-
     [Test]
     public void Languages_AddFirstLanguage_GetCorrectUniqueLanguage()
     {
