@@ -40,7 +40,22 @@ public class Person {
     }
 
     public void setLanguages(ArrayList<String> languagesToAdd){
-        _languages.addAll(languagesToAdd);
+        for(String languageToAdd : languagesToAdd){
+            if(!this.doesLanguageExists(languageToAdd)){
+                _languages.add(languageToAdd);
+            }
+        }
     }
     //endregion public methods
+
+    //region private methods
+    private boolean doesLanguageExists(String languageToFind){
+        for(String currentLanguage : _languages){
+            if(currentLanguage.equals(languageToFind)){
+                return true;
+            }
+        }
+        return false;
+    }
+    //endregion private methods
 }
