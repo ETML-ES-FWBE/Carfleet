@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -7,18 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PersonTest {
     //region private attributes
-    private static String _name = "Einstein";
-    private static String _firstname = "Albert";
-    private static String _phonenumber = "+41793456789";
-    private static String _emailaddress = "ae@relativity.org";
+    private String _name = "Einstein";
+    private String _firstname = "Albert";
+    private String _phonenumber = "+41793456789";
+    private String _emailaddress = "ae@relativity.org";
 
-    private static ArrayList<String> _languages = new ArrayList<String>();
-    private static Person _person;
+    private ArrayList<String> _languages = new ArrayList<String>();
+    private Person _person;
     //endregion private attributes
 
-    @BeforeAll
-    public static void beforeAll() {
-        _languages = new ArrayList<String>();
+    @BeforeEach
+    public void beforeEach() {
         _person = new Person(_name, _firstname, _phonenumber, _emailaddress, _languages);
     }
 
@@ -39,11 +39,11 @@ public class PersonTest {
     }
 
     @Test
-    public void languages_addFirstLanguage_getCorrectUniqueLanguage()
-    {
+    public void languages_addFirstLanguage_getCorrectUniqueLanguage(){
         //given
         String expectedLanguage = "French";
         ArrayList<String> expectedLanguages = new ArrayList<String>() { {add(expectedLanguage);} };
+        assertEquals(0, _person.getLanguages().size());
 
         //when
         _person.setLanguages(expectedLanguages);
@@ -54,43 +54,30 @@ public class PersonTest {
         assertEquals(expectedLanguage, actualLanguages.getFirst());
     }
 
-    /* Test written in CSharp
-    [Test]
-    public void Languages_AddFirstLanguage_GetCorrectUniqueLanguage()
-    {
+    @Test
+    public void languages_addMultipleLanguageAtOnce_getCorrectLlistOfLanguages(){
         //given
-        string expectedLanguage = "French";
-        List<string> expectedLanguages = new List<string>() {expectedLanguage };
-
-        //when
-        _person.Languages = expectedLanguages;
-
-        //then
-        Assert.AreEqual(expectedLanguage, _person.Languages[0]);
-    }
-
-        [Test]
-    public void Languages_AddMultipleLanguagesAtOnce_GetCorrectListOfLanguages()
-    {
-        //given
-        List<string> expectedLanguages = new List<string>() { "French", "Spanish", "German" };
-
-        //when
-        _person.Languages = expectedLanguages;
-
-        //then
-        Assert.AreEqual(expectedLanguages.Count, _person.Languages.Count);
-        foreach(string expectedLanguage in expectedLanguages)
-        {
-            bool languageExists = false;
-            if(_person.Languages.Contains(expectedLanguage))
+        ArrayList<String> expectedLanguages = new ArrayList<String>(){
             {
-                languageExists = true;
+                add("French");
+                add("Spanish");
+                add("German");
             }
-            Assert.IsTrue(languageExists);
+        };
+        assertEquals(0, _person.getLanguages().size());
+
+        //when
+        _person.setLanguages(expectedLanguages);
+
+        //then
+        ArrayList<String> actualLanguages = _person.getLanguages();
+        assertEquals(expectedLanguages.size(), actualLanguages.size());
+        for(int i = 0; i < expectedLanguages.size(); i++){
+            assertEquals(expectedLanguages.get(i), actualLanguages.get(i));
         }
     }
 
+    /* Test written in CSharp
         [Test]
     public void Languages_AddMultipleLanguagesInExistingLanguagesList_GetCorrectListOfLanguages()
     {
