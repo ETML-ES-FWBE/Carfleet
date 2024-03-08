@@ -1,0 +1,13 @@
+@startuml
+skinparam classAttributeIconSize 0
+class Person{
+    - name : string
+
+    + Person(name:string, firstname:string, phonenumber:string, emailaddress:string, languages:string[])
+    + <<get>>name():string
+    + <<get>>firstname():string
+    + <<get>>phonenumber():string
+    + <<get>>languages():array[]
+}
+
+@enduml
