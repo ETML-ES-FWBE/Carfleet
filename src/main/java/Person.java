@@ -38,5 +38,9 @@ public class Person {
     public ArrayList<String> getLanguages(){
         return _languages;
     }
+
+    public void setLanguages(ArrayList<String> languagesToAdd){
+        _languages.addAll(languagesToAdd);
+    }
     //endregion public methods
 }

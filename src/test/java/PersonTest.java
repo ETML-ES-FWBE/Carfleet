@@ -38,6 +38,22 @@ public class PersonTest {
         assertEquals(_languages, _person.getLanguages());
     }
 
+    @Test
+    public void languages_addFirstLanguage_getCorrectUniqueLanguage()
+    {
+        //given
+        String expectedLanguage = "French";
+        ArrayList<String> expectedLanguages = new ArrayList<String>() { {add(expectedLanguage);} };
+
+        //when
+        _person.setLanguages(expectedLanguages);
+
+        //then
+        ArrayList<String> actualLanguages = _person.getLanguages();
+        assertEquals(expectedLanguages.size(), actualLanguages.size());
+        assertEquals(expectedLanguage, actualLanguages.getFirst());
+    }
+
     /* Test written in CSharp
     [Test]
     public void Languages_AddFirstLanguage_GetCorrectUniqueLanguage()
